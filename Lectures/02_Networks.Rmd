@@ -1,0 +1,525 @@
+---
+title: "Introduction to Network Concepts"
+output: 
+  beamer_presentation:
+    includes:
+      in_header: header.tex
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+#opts_chunk$set(echo = FALSE)
+
+library(statnet)
+library(GGally)
+theme_set(theme_minimal() + theme(title=element_text(size = 20)))
+
+```
+
+## Today
+- Introduction network terms
+- The role of graph theory
+- How matrices (ew math) help us
+
+## Nodes and Edges
+
+Networks are made up of nodes that are connected with edges. 
+
+## Network
+
+```{r network, echo=FALSE}
+
+set.seed(1)
+net <- rgraph(n=10, m=1, tprob=.2, mode='digraph')
+colnames(net) <- LETTERS[1:10]
+net <- network(net)
+ggnet2(net, mode="circle", color='orangered3', arrow.size = 10,  arrow.gap = 0.025)
+
+```
+
+
+## Network
+
+```{r network_node, echo=FALSE}
+ggnet2(net, mode="circle", color='orangered3', arrow.size = 10,  arrow.gap = 0.025) + 
+  annotate("segment", x=.8, y=.34, xend=.97, yend=.34, arrow=arrow()) + 
+  annotate("text", x=.8, y=.34, label="Node", hjust=1, size=10)
+```
+
+
+## Network
+
+```{r network_edge, echo=FALSE}
+
+ggnet2(net, mode="circle", color='orangered3', arrow.size = 10,  arrow.gap = 0.025) + 
+  annotate("segment", x=.8, y=.34, xend=.97, yend=.34, arrow=arrow()) + 
+  annotate("text", x=.8, y=.34, label="Node", hjust=1, size=10) + 
+  annotate("segment", x=.65, y=.45, xend=.8, yend=.45, arrow=arrow()) + 
+  annotate("text", x=.65, y=.45, label="Edge", size=10, hjust=1)
+```
+
+## Graph Theory
+
+This makes sense visually, but in order to analyze it we need to use *math*
+
+## Graph theory
+
+Graph:
+
+> - Is defined as a set of vertices (nodes) and edges: G(V, E)
+> - Start with a set of vertices: V={A, B, C, D}
+> - Edges connect two vertices, making them adjacent: (A, C)
+> - E then the set of such connections: E={(A,C), (A,D), (B,C)} 
+  >   - Note: these edges have a direction: (A, C), is different from (C,A)
+
+## Network as a Graph
+
+```{r network_labeled, echo=FALSE, results='asis', out.height='60%' ,fig.align='center'}
+tmp <- apply(as.edgelist(net), 1, function(x) paste0("(", LETTERS[x[1]], ",", LETTERS[x[2]], ")"))
+cat(paste0("E={",paste0(tmp, collapse = ", "),"}"))
+cat("\n")
+ggnet2(net, mode="circle", color='orangered3', arrow.size = 10,  
+       arrow.gap = 0.05, label=TRUE, size=20, label.size=15)
+```
+## Adjacent, Incident, and Degree
+
+- Two vertices that are connected by an edge are **adjacent**
+- An edge that is connected to a vertice is said to be **incident** to it. 
+- The number of edges **incident** to a vertex is its **degree** 
+
+## Degree
+
+A has 4 edges incident to it, so it has degree of 4
+```{r network_deg, echo=FALSE, out.height='60%' ,fig.align='center'}
+net %e% "color" <- "gray"
+set.edge.attribute(net, "color",value='springgreen4',
+                   e=get.edgeIDs(net, 1, neighborhood = "combined"))
+ggnet2(net, mode="circle", color='orangered3', arrow.size = 10,  edge.size = 2,
+       arrow.gap = 0.05, label=TRUE, size=20, label.size=15, edge.color = "color")
+```
+## Degree for E
+
+
+What is E's degree? 
+
+```{r network_deg2, echo=FALSE, out.height='60%', fig.align='center'}
+net %e% "color" <- "gray"
+ggnet2(net, mode="circle", color='orangered3', arrow.size = 10,  edge.size = 2,
+       arrow.gap = 0.05, label=TRUE, size=20, label.size=15, edge.color = "color")
+```
+
+## Degree for E
+
+```{r network_deg3, echo=FALSE, out.height='60%', fig.align='center'}
+set.edge.attribute(net, "color",value='springgreen4',
+                   e=get.edgeIDs(net, 5, neighborhood = "combined"))
+ggnet2(net, mode="circle", color='orangered3', arrow.size = 10,  edge.size = 2,
+       arrow.gap = 0.05, label=TRUE, size=20, label.size=15, edge.color = "color")
+```
+
+
+## Undirected networks
+
+It is also possible to have networks where edges do not have a direction: 
+
+```{r network_un, echo=FALSE, out.height='60%',fig.align='center', results='asis'}
+
+set.seed(1)
+net <- rgraph(n=10, m=1, tprob=.2, mode='graph')
+colnames(net) <- LETTERS[1:10]
+net <- network(net,directed = F)
+tmp <- apply(as.edgelist(net), 1, function(x) paste0("(", LETTERS[x[1]], ",", LETTERS[x[2]], ")"))
+cat(paste0("E={",paste0(tmp, collapse = ", "),"}"))
+cat("\n")
+ggnet2(net, mode="circle", color='orangered3', label=TRUE, size=20, label.size=15)
+```
+
+
+## Directed vs Undirected Network
+
+Whether a network is directed or undirected is dependent on the types of relationships:
+
+### Directed: 
+ - Parent-Child
+ - Donor-Donee
+
+### Undirected
+ - Friend (hopefully)
+ - Classmate 
+ - Ally 
+
+## Characteristics for nodes
+
+What are some things that might matter if you are at a node? 
+- Where can you move to?
+- How fast can you get there? 
+- Who can you reach? 
+  
+## Moving along a network 
+We can move from one vertex (node) to another through edges.
+
+- A walk is a sequence of **adjacent** vertices: 
+  - G-A-D-H
+  - F-C-E-F-I
+  - H-D-A
+- A path is a sequnce of **adjacent** vertices where none are repeated:
+  - G-A-D-H
+  - H-D-A
+- All paths are walks, but not all walks are paths. 
+
+## The length of paths and walks
+
+- The **length** of a walk or paths is how many edges are in them. 
+- The shortest path is called a **geodesic**.
+- The **(geodesic) distance** between two vertices is the length their **geodesic**
+
+
+## Geodesic Distance
+
+The distance between F and C is 1
+```{r network_dist1, echo=FALSE, out.height='60%',fig.align='center', results='asis'}
+net %e% "color" <- "gray"
+set.edge.attribute(net, "color", "springgreen4", 
+                   e=c(get.edgeIDs(net, 6, 3)))
+
+ggnet2(net, mode="circle", color='orangered3',  edge.size = 2,
+       label=TRUE, size=20, label.size=15, edge.color = "color")
+```
+
+
+## Geodesic Distance
+
+The distance between G and C is 4
+```{r network_dist2, echo=FALSE, out.height='60%',fig.align='center', results='asis'}
+net %e% "color" <- "gray"
+set.edge.attribute(net, "color", "springgreen4", 
+                   e=c(get.edgeIDs(net, 7, 1), get.edgeIDs(net, 1, 4),
+                       get.edgeIDs(net, 4, 6), get.edgeIDs(net, 6, 3)))
+
+ggnet2(net, mode="circle", color='orangered3',  edge.size = 2,
+       label=TRUE, size=20, label.size=15, edge.color = "color")
+```
+
+## Why care about distance?
+
+- Distance is viewed as how 'close' two vertices are. 
+- Information spreads faster between two vertices that are closer
+
+## Looking at some real data: Twitter Senate Data
+
+\begin{center}
+
+Twitter follow network among US Senators
+
+\end{center}
+
+```{r, echo=FALSE, out.height='60%',fig.align='center', results='hide'}
+adj_df <- read.csv("data/senate_adj.csv")
+meta_df <- read.csv("data/senate_data.csv")
+adj_df$X <- NULL
+adj_df <- as.matrix(adj_df)
+adj_df <- adj_df=="True"
+
+present <- nchar(colnames(adj_df)) != 3
+
+colnames(adj_df) <- meta_df$name
+rownames(adj_df) <- meta_df$name[present]
+adj_df <- adj_df[,present]
+meta_df <- meta_df[present, ]
+
+
+sen_net <- network(adj_df, directed = T)
+sen_net %v% "party" <- ifelse(meta_df$party=="democrat", 
+                              "skyblue2", ifelse(meta_df$party=="republican",
+                                                 "orangered3", 
+                                                 "springgreen3"))
+
+delete.vertices(sen_net, isolates(sen_net))
+set.seed(1)
+ggnet2(sen_net,mode = "fruchtermanreingold",
+       color='party',  edge.size = .5,
+       edge.alpha = .5,
+       label=F, size=5, label.size=10, 
+        arrow.size = 3,  
+       arrow.gap = 0.02 ) + guides(color=F)
+```
+
+## Looking at some real data
+
+```{r, echo=FALSE, out.height='60%',fig.align='center', results='hide'}
+
+dists <- geodist(sen_net, predecessors = T, inf.replace = NA)
+
+opts <- which(dists$counts==1 & dists$gdist>2, arr.ind = T)
+
+names <- sen_net %v% "vertex.names"
+names <- sapply(names, function(x) strsplit(x, " ")[[1]][2])
+
+dists$gdist[opts[1,1],opts[1,2]]
+dists$counts[opts[1,1],opts[1,2]]
+
+e_list <- numeric(dists$gdist[opts[1,1],opts[1,2]])
+name_list <- numeric(length(e_list) + 1)
+end <- opts[1,2]
+name_list[1] <- names[end]
+
+for(ii in 1:dists$gdist[opts[1,1],opts[1,2]]){
+  tmp <- dists$predecessors[[opts[1,1]]][[end]]
+
+  e_list[ii] <- get.edgeIDs(sen_net, tmp, alter=end)
+  end <- tmp 
+  name_list[ii + 1] <- names[end]
+}
+
+sen_net %e% "color" <- "gray"
+sen_net %e% "size" <- .5
+sen_net %v% "name" <- ""
+
+set.vertex.attribute(sen_net, "name", names[opts[1,]],v = opts[1,])
+set.edge.attribute(sen_net, "color",value = "deeppink1", e = e_list)
+set.edge.attribute(sen_net, "size",value = 2, e = e_list)
+
+set.seed(1)
+ggnet2(sen_net,mode = "fruchtermanreingold",
+       color='party',  edge.size ="size",
+       edge.alpha = .5, edge.color='color',
+       label="name", size=5, label.size=10, 
+        arrow.size = 3,  
+       arrow.gap = 0.02 ) + guides(color=F)
+```
+
+
+```{r, echo=FALSE, results='asis'}
+name_list <- rev(name_list)
+cat(paste(name_list[1], "follows", paste0(name_list[-1], collapse=", who follows ")))
+```
+
+
+## Looking at some real data
+
+```{r, echo=FALSE, out.height='60%',fig.align='center', results='hide'}
+e_list <- numeric(dists$gdist[opts[1,2],opts[1,1]])
+
+name_list <- numeric(length(e_list) + 1)
+end <- opts[1,1]
+
+name_list[1] <- names[end]
+
+for(ii in 1:dists$gdist[opts[1,2],opts[1,1]]){
+  tmp <- dists$predecessors[[opts[1,2]]][[end]][1]
+
+  e_list[ii] <- get.edgeIDs(sen_net, tmp, alter=end)
+  end <- tmp 
+  name_list[ii + 1] <- names[end]
+
+}
+
+
+set.edge.attribute(sen_net, "color",value = "deeppink1", e = e_list)
+set.edge.attribute(sen_net, "size",value = 2, e = e_list)
+
+set.seed(1)
+ggnet2(sen_net,mode = "fruchtermanreingold",
+       color='party',  edge.size ="size",
+       edge.alpha = .5, edge.color='color',
+       label="name", size=5, label.size=10, 
+        arrow.size = 3,  
+       arrow.gap = 0.02 ) + guides(color=F)
+```
+
+```{r, echo=FALSE, results='asis'}
+
+name_list <- rev(name_list)
+cat(paste(name_list[1], "follows", paste0(name_list[-1], collapse=", who follows ")))
+```
+
+
+## What can we learn?
+
+- The mean distance between any two senators is `r round(mean(dists$gdist, na.rm=T), 2)`
+- The median distance between any two senators is `r median(dists$gdist, na.rm=T)`
+- The median degree is `r median(degree(sen_net))`
+
+
+## Degree for Directed Networks
+
+Directed networks have both **outdegree** (how many edges start at a vertex) and **indegree** (how many edges point at a vertex):
+
+- Median outdegree (how many each Senator follows): `r median(degree(sen_net, cmode="outdegree"))`
+- Median indegree (how many followers each Senator has): `r median(degree(sen_net, cmode="indegree"))`
+
+## Who is the most popular? 
+ 
+```{r, echo=FALSE, results='asis'}
+names <- sen_net %v% "vertex.names"
+
+degs_out <- degree(sen_net, cmode='outdegree')
+degs_in <- degree(sen_net, cmode='indegree')
+
+degs <- data.frame("Following"=degs_out, "Followers"=degs_in)
+rownames(degs) <- names
+kable(degs[1:5,])
+```
+
+- `r names[which.max(degs_out)]` follows the most (follows `r max(degs_out)`)
+- `r names[which.max(degs_in)]` is followed by the most (follows `r max(degs_in)`)
+
+
+## Who can reach who?
+
+- A vertex with no incident edges is known as an **isolate**
+- We can also group vertices by who they can reach. 
+
+\begin{center}
+\vspace{1em}
+A \textbf{component} is the maximal (largest) group of vertices where every vertex within it can reach every other vertex.
+
+\end{center} 
+
+## Some Components
+
+
+```{r network_comp, echo=FALSE, out.height='60%',fig.align='center', results='hide'}
+set.seed(1)
+n <- 20
+net <- rgraph(n=n, m=1, tprob=.1, mode='graph')
+colnames(net) <- LETTERS[1:n]
+net <- network(net,directed = F)
+comp <- component.dist(net)
+net %v% "component" <- comp$membership
+ggnet2(net, color='component',  edge.size = 2,
+       label=TRUE, size=20, label.size=15, palette = "Set2") + guides(color=F)
+
+```
+\begin{center}
+
+This network has 4 components, the largest has 15 vertices in it. 
+\end{center}
+
+## Components with Directed Graphs
+
+When a network is directed, then we need to think about direction.
+
+- **Weak Component:** Is a component if we disregard direction of edges.
+- **Strong Component:** Is a component if we follow direction of edges
+
+## Strong/Weak Components:
+
+
+```{r network_comp_dir, echo=FALSE, out.height='60%',fig.align='center', results='hide'}
+set.seed(711)
+n <- 20
+net <- rgraph(n=n, m=1, tprob=.09, mode='digraph')
+colnames(net) <- LETTERS[1:n]
+net <- network(net,directed = T)
+comp <- component.dist(net, connected="strong")
+net %v% "component" <- comp$membership
+p1 <- ggnet2(net, color='component',  edge.size = 2,
+       label=TRUE, size=15, label.size=10, palette = "Set2",        
+       arrow.size = 10,  
+       arrow.gap = 0.05) + guides(color=F) + ggtitle("Strong Component")
+
+lo <- p1$data[,c("x","y")]
+comp <- component.dist(net,connected = "weak")
+net %v% "component" <- comp$membership
+p2 <- ggnet2(net, mode=as.matrix(lo),
+       color='component',  edge.size = 2,
+       label=TRUE, size=15, label.size=10, palette = "Set2", 
+        arrow.size = 10,  
+       arrow.gap = 0.05 ) + guides(color=F) +ggtitle("Weak Component")
+gridExtra::grid.arrange(p1, p2,ncol=2)
+```
+
+
+## Real Life Data
+
+```{r, echo=FALSE, out.height='60%',fig.align='center', results='hide'}
+comp <- component.dist(sen_net, connected="strong")
+sen_net %v% "component" <- comp$membership
+set.seed(1)
+p1 <- ggnet2(sen_net, color='component', edge.size = .5,
+        edge.alpha = .5,
+        size=5, label.size=10, 
+        arrow.size = 3,
+       label=F, palette = "Set2", 
+       arrow.gap = 0.02) + guides(color=F) + ggtitle("Strong Component")
+
+lo <- p1$data[,c("x","y")]
+comp <- component.dist(sen_net,connected = "weak")
+sen_net %v% "component" <- comp$membership
+p2 <- ggnet2(sen_net, mode=as.matrix(lo),
+       color='component',  edge.size = .5,
+        edge.alpha = .5,
+        size=5, label.size=10, 
+        arrow.size = 3,
+       label=F, palette = "Set2", 
+       arrow.gap = 0.02 ) + guides(color=F) +ggtitle("Weak Component")
+gridExtra::grid.arrange(p1, p2,ncol=2)
+```
+
+
+## Bring the math back in
+
+How do we organize this data? An **adjacency matrix**
+
+## Matrix Referesher 
+
+$$\mathbf{A} = \left[\begin{array}
+{rrr}
+0 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{array}\right]$$
+
+- A matrix is a rectangular collection of numbers (n $\times$ m in size). 
+- Each number (element) is given a position by what row and column it is. 
+- The 1 above is in row 2, column 3. 
+
+## Adjacency matrix
+
+- For now our matrices will be square: n $\times$ n where n is the number of vertices. 
+- A 1 means an edge exists from that row to that column, a 0 means no edge exists. 
+
+\pause 
+$$\mathbf{A} = \left[\begin{array}
+{rrr}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+0 & 1 & 0
+\end{array}\right]$$
+
+- In **A** there is an edge from node 3 to node 2, and from node 1 to node 3 (directed). 
+
+## Adjacency Matrix vs Network Graph
+
+```{r, echo=FALSE, out.width='45%', fig.align='center'}
+set.seed(1)
+n <- 6
+mat <- rgraph(n=n, m=1, mode='graph')
+colnames(mat) <- LETTERS[1:n]
+rownames(mat) <- LETTERS[1:n]
+net <- network(mat,directed = F)
+ggnet2(net,  edge.size = 2, mode='circle',
+       label=TRUE, size=25, label.size=20)
+```
+
+```{r, echo=FALSE, results='asis', out.width='45%'}
+print(xtable::xtable(mat,align="lcccccc", digits=0), comment=F)
+```
+
+## Undirected Adjacency Matrix
+
+- For undirected graphs the adjacency matrix is mirrored across the diagonal
+- Meaning that the entry for  $a_{i,j}$ is the same as for  $a_{j,i}$
+
+## Senator Adjacency Matrix 
+
+```{r, echo=FALSE,results="asis"}
+adj_df <- 1*adj_df
+adj_mat <- adj_df[1:5,1:3]
+rownames(adj_mat)[3] <- "Doug Jones"
+colnames(adj_mat)[3] <- "Doug Jones"
+
+print(xtable::xtable(adj_mat,align="lccc",digits=0), comment= F)
+
+```

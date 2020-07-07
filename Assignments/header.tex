@@ -1,0 +1,40 @@
+%\documentclass[letterpaper, 11pt]{exam}
+\usepackage[top=1in, left=1in, right=1in, bottom=1in]{geometry}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault,scaled=.85]{FiraSans}
+\usepackage{newtxsf}
+
+
+% typeblock size of 5.5 by 4 inches
+%\setlength{\textheight}{500pt} \setlength{\textwidth}{320pt}
+%\setlength{\oddsidemargin}{70pt} \setlength{\evensidemargin}{75pt}
+%\setlength{\topmargin}{35.9pt} \setlength{\footskip}{27.5pt}
+%\setlength{\headheight}{14.6pt} \setlength{\headsep}{19.9pt}
+
+
+%\usepackage{geometry}
+
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\newcommand{\tf}[1][{}]{%
+	\fillin[#1][0.25in]%
+}
+
+\newcommand{\tfexp}[2]{
+	\question \tf[#2] #1
+	\begin{parts}
+		\part Explanation:
+	\end{parts}
+	\vspace{1in}
+}
+
+\hypersetup{
+	colorlinks = true,
+	urlcolor = gray,
+}

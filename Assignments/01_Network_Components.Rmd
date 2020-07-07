@@ -1,0 +1,86 @@
+---
+title: "Identifying Network Information"
+output: 
+  pdf_document:
+    includes:
+      in_header: header.tex
+documentclass: 'exam'
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(statnet)
+library(GGally)
+theme_set(theme_minimal() + theme(title=element_text(size = 20)))
+```
+
+\hfill Name: \hspace{15em}
+
+\vspace{1em}
+
+Answer the questions about the network in Figure 1. 
+
+```{r network,out.width='50%', fig.align='center', fig.cap='Network', fig.pos='H'}
+
+set.seed(711)
+n <- 8
+net <- rgraph(n=n, m=1, tprob=.15, mode='digraph')
+colnames(net) <- LETTERS[1:n]
+net <- network(net)
+ggnet2(net, mode="circle", color='gray', label=T, 
+       label.size = 10, size=12,
+       arrow.size = 10,  arrow.gap = 0.04) 
+```
+
+```{=latex}
+\begin{questions}
+
+  \question The basics:
+  
+  \begin{parts}
+  
+    \part How many nodes are there? 
+    
+    \part How many edges are there?
+    
+    \part Are the edges directed or undirected? 
+  
+  \end{parts}
+  
+  \question Connecting vertices:
+  
+  \begin{parts}
+  
+  \part How many edges are incident to C? 
+  \vspace{1em}
+  
+  \part What nodes are adjacent to B?
+  \vspace{1em}
+
+  
+  \part Write out all the walks from A to F 
+  \vspace{3em}
+  
+  \part What is the geodesic walk from A to F? How long is it?
+  \vspace{3em}
+  
+  \end{parts}
+  
+  \question Convert the network plot to an adjacency matrix:
+  $$
+  \begin{array}{l|c|c|c|c|c|c|c|c| } 
+    &A & B & C & D & E & F & G & H \\ \hline
+  A &  &   &   &   &   &   &   &  \\ \hline
+  B &  &   &   &   &   &   &   &  \\ \hline
+  C &  &   &   &   &   &   &   &  \\ \hline
+  D &  &   &   &   &   &   &   &  \\ \hline
+  E &  &   &   &   &   &   &   &  \\ \hline
+  F &  &   &   &   &   &   &   &  \\ \hline
+  G &  &   &   &   &   &   &   &  \\ \hline
+  H &  &   &   &   &   &   &   &  \\ \hline
+  \end{array}
+  $$
+
+\end{questions}
+```

@@ -1,0 +1,300 @@
+% This syllabus template was created by:
+% Brian R. Hall
+% Associate Professor, Champlain College
+% www.brianrhall.net
+
+% Document settings
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{multirow}
+\usepackage{setspace}
+\pagestyle{plain}
+\setlength\parindent{0pt}
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault,scaled=.85]{FiraSans}
+\usepackage{newtxsf}
+
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+
+
+\newenvironment{courseday}[2]{
+\begin{itemize}
+	\item[] \subsubsection*{\textbf{#1} #2}
+	\begin{itemize}
+}{
+\end{itemize}
+\end{itemize}
+}
+
+\usepackage{titlesec}
+\titlespacing*{\section}
+{0pt}{1ex}{.5ex}
+\titlespacing*{\subsection}
+{0pt}{.5ex}{.2ex}
+\titlespacing*{\subsubsection}
+{-10pt}{.5ex}{.1ex}
+\usepackage{bookmark}
+
+% The following metadata will show up in the PDF properties
+\hypersetup{
+	pdftitle={POL XXX: Social Network Analysis},
+	pdfcreator={Kevin Reuning}, 
+	pdfauthor={Kevin Reuning},
+	colorlinks = true,
+	urlcolor = gray,
+	pdflang={en-US}
+}
+
+%\usepackage{tagpdf}
+%\tagpdfsetup{activate-all=true}
+%\usepackage[tagged]{accessibility}
+
+\begin{document}
+
+% Course information
+\begin{center}
+\begin{tabular}{c}
+ \LARGE \textbf{Social Network Analysis} \\\\
+ \Large POL XXX  \\
+ \Large Harrison Hall 302 \\
+ \Large Wed \& Fri 2:50 pm -- 4:10 pm\\
+\end{tabular}
+\end{center}
+\vspace{5mm}
+
+% Professor information
+\begin{center}
+	\begin{tabular}{ r l }
+		Instructor: & Dr. Kevin Reuning (ROY-ning)\\
+		Email: & \ttfamily{\href{mailto:reunink@miamioh.edu}{reunink@miamioh.edu}} \\
+		Course Website: & Canvas \\
+		Office: &  Harrison Hall 222 \\
+		Office Hours: &  Monday: 1:00 pm -- 3:00 pm \\
+		& Wed \& Fri: 1:30 -- 2:30 pm \\ 
+		& and by appointment \\ \hline 
+	\end{tabular}
+\end{center}
+\vspace{5mm}
+
+
+% Course details
+ \section*{\large Course Description}
+
+In this course we will learn how to ask questions about, collect data on, and analyze social networks. The study of networks spans many fields, from social science to physics to mathematics. Because of this we will often move from sociological theories of why networks are important to methodological questions about how to manipulate matrices. By the end of the semester though you will be able to investigate a social network, explain what its important characteristics are, and relate it back to social theories.  \\
+
+\subsection*{ \large Student Learning Objectives} 
+\begin{enumerate}
+	\item Students will be able to explain and calculate important characteristics of networks.
+	\item Students will demonstrate skill in collecting social network data and then visualizing social networks. 
+	\item Students will be able to identify and apply the appropriate statistical methodology to test theories on social networks.
+	\item Students will be able to apply network methodologies to contemporary political and social issues to identify the differences in possible solutions.
+	\item Students will be able to explain the role of social networks in democratic life.
+\end{enumerate}
+
+\subsection*{\large Required Book} 
+
+\begin{itemize}
+	\item[] Borgatti, S.P., Everett, M.G. and Johnson, J.C., 2018. \textit{Analyzing social networks}. Sage.
+\end{itemize}
+
+
+\clearpage 
+
+% Course Policies. These are just examples, modify to your liking.
+\section*{\Large Course Policies} \hrule 
+\vspace{.25cm}
+\subsection*{Respect} In this course we will learning how to test social scientific theories and evaluate public policy. At times this will require discussing issues that touch many of us personally. In these discussions our aim is to understand what the evidence implies about the world. In these discussions we will treat everyone with respect. \\
+
+\subsection*{Preparation} This course builds on itself and so students need to come to class everyday ready and willing to learn. Most weeks we will spend one day in a lecture and another day working on assignments. On working days students are expected to bring a laptop and be prepared to actively engage in the assignment. \\
+
+
+\subsection*{Technology} In the class you are expected to be focused on what is going on within the class. Laptops will be required on some days. On those days that laptops are not required you may bring one to take notes, etc. If the laptop becomes a distraction to those around you we will look at reevaluating this policy.  \\
+
+\subsection*{Email Policy} I will check email between 8am and 6pm, and will try to always respond to any contact within 24 hours. Although I do not expect formality in email communications, I do expect you to respect that emails are not a costless act. \\ 
+
+
+\section*{\Large Grade Distribution and Assignments} \hrule 
+\vspace{.2cm}
+\begin{table}[h!]
+	\centering
+\begin{tabular}{l c}
+	Item & Percentage \\ \hline 
+\end{tabular}
+\end{table}
+
+\subsection*{Attendance} You are expected to come to class. You are given 2 unexcused absences without loss of credit. Additional unexcused absences will lead to lost points:
+\begin{itemize}
+	\item 0-2 unexcused absences: 5\% 
+	\item 3 unexcused absences: 4\% 
+	\item 4 unexcused absences: 3\% 
+	\item 5 unexcused absences: 2\% 
+	\item 6 unexcused absences: 1\% 
+	\item 7 or more unexcused absences: 0\% 
+\end{itemize}
+In addition, you will still be expected to complete any assignments that you missed. These will be due one week after you return to class. You will be expected to contact me in order to get access to any missed assignments. Not completing a missed assignment because you were unaware of it is not an excuse. \\
+
+\subsection*{Excused absences} In accordance with Miami University policy (\url{https://blogs.miamioh.edu/miamipolicies/?p=2046}), I must be notified in writing prior to any excused absence. These will not count against your unexcused absences. You will still be expected to complete any in-class assignments. As for unexcused absences you must contact me to received the assignment and they are due one week after your return to class. \\
+
+\subsection*{Assignments} Throughout the semester we will work on assignments both in and outside of class. I will make it clear as I handout assignments how they will be graded. \\
+
+\subsection*{Midterm} The midterm will take place on \\ 
+
+\subsection*{Final} The final will take place on   \\
+
+\subsection*{Extra Credit} I will provide extra credit opportunities throughout the semester and will announce them in class and on Canvas.\\
+
+\subsection*{Groups} You will work with a group throughout this semester in order  \\
+
+\subsection*{Late work policy} In order to receive a deadline extension you should contact me more than 24 hours before the deadline. If an assignment is turned in late without an extension but within 24 hours of the due date, your grade will decrease by 5 percentage points (a 95\% would become a 90\%). For every additional 24 hours after this it loses another 5\%.   \\
+
+\subsection*{Online Work} In order to learn R in a hands on fashion, each week we will have an online tutorial in R. This work is NOT graded, it is solely designed to help you with the homework that will be due at the next class session. 
+
+
+\subsection*{\Large Letter Grade Distribution} 
+\hspace*{40mm}
+\begin{tabular}{ l l | l l }
+	\textgreater= 93.00 & A  & 73.00 - 76.99  & C  \\
+	90.00 - 92.99       & A- & 70.00 - 72.99  & C- \\
+	87.00 - 89.99       & B+ & 67.00 - 69.99  & D+ \\
+	83.00 - 86.99       & B  & 63.00 - 67.99  & D  \\
+	80.00 - 82.99       & B- & 60.00 - 62.99  & D- \\
+	77.00 - 79.99       & C+ & \textless59.99 & F
+\end{tabular} \\
+
+\hrulefill  
+
+\section*{Academic Integrity} 
+Miami University is a scholarly community whose members believe that excellence in education is grounded in qualities of character as well as of intellect. We respect the dignity of other persons, the rights and property of others, and the right of others to hold and express disparate beliefs. We believe in honesty, integrity, and the importance of moral conduct. We defend the freedom of inquiry that is the heart of learning and combine that freedom with the exercise of judgment and the acceptance of personal responsibility.\\
+
+Miami demands the highest standards of professional conduct from its students, faculty, and staff.  As a community of scholars, our fundamental purpose is the pursuit of knowledge.  Integrity in research and creative activities and in academic study is based on sound disciplinary practices and expectations, as well as a commitment to the values of honesty and integrity. \\
+
+Any student caught committing academic dishonesty will, at a minimum, receive a 0 for the assignment at hand. For more information on academic dishonesty and potential punishments visit \url{http://MiamiOH.edu/integrity}. \\
+
+
+\section*{Disability Services} 
+If you are a student with a physical, learning, medical and/or psychiatric disability and feel that you may need a reasonable accommodation to fulfill the essential functions of the course that are listed in this syllabus, you are encouraged to contact the Office of Student Disability Services at 529-1541 (V/TTY), located in the Shriver Center, Room 304. \\ 
+
+
+% Course Outline
+\section*{\Large Course Outline}\hrule 
+\vspace{.25cm}
+
+\begin{courseday}{Week 1}{Introduction to Social Networks}
+	\item[] \textit{Why do we care about social networks?}
+	\item[] Granovetter, M. S. 1973. ``The Strength of Weak Ties. American.'' \textit{Journal of Sociology} 78(6):1360–1380.
+\end{courseday}
+
+\begin{courseday}{Week 2}{What is a social network?}
+	\item[] Nodes, Edges and Matrices
+	\item[] Chapter 2
+	\item[] Healy, Kieran. 2013. ``Using Metadata to find Paul Revere.'' \url{https://kieranhealy.org/blog/archives/2013/06/09/using-metadata-to-find-paul-revere/} 
+\end{courseday}
+
+
+\begin{courseday}{Week 3}{Data Collection: Surveys and Observational}
+	\item[] How can you collect network data? 
+	\item[] Chapter 3 and 4
+\end{courseday}
+
+
+\begin{courseday}{Week 4}{Describing a Network}
+	\item[]  What can we say about a network?
+	\item[] Chapter 9
+	\item[] Koger, G., Masket, S. and Noel, H., 2009. ``Partisan webs: Information exchange and party networks.'' \textit{British Journal of Political Science} pp.633-653.
+\end{courseday}
+
+\begin{courseday}{Week 5}{Centrality within a Network}
+	\item[]  Who is important within a network?
+	\item[] Chapter 10
+	\item[] One of:
+	\item Faris, R. and Felmlee, D., 2011. ``Status struggles: Network centrality and gender segregation in same-and cross-gender aggression.'' \textit{American Sociological Review}, 76(1), pp.48-73.
+	\item Cassidy, L. and Barnes, G.D., 2012. Understanding household connectivity and resilience in marginal rural communities through social network analysis in the village of Habu, Botswana. Ecology and Society, 17(4).
+	\item Houghteling, Clara, and Prentiss A. Dantzler. 2019. ``Taking a knee, taking a stand: Social networks and identity salience in the 2017 NFL protests.'' \textit{Sociology of Race and Ethnicity}: 2332649219885978.
+\end{courseday}
+
+
+\begin{courseday}{Week 6}{Clusters and Cliques}
+	\item[] Can we find relevant subgroups?
+	\item[] Chapter 11
+	\item[] Schaefer, D.R., Bouchard, M., Young, J.T. and Kreager, D.A., 2017. ``Friends in locked places: An investigation of prison inmate network structure.'' \textit{Social networks}, 51:88-103.
+	
+	
+\end{courseday}
+
+
+%\begin{courseday}{Week 6}{Visualizing Networks}
+%	\item[] Make graphs pretty
+%	\item[] Chapter 37
+%\end{courseday}
+
+
+\begin{courseday}{Week 7}{Review and Midterm}
+	\item[] 
+\end{courseday}
+
+
+
+\begin{courseday}{Week 8}{Affiliation Networks}
+	\item[] What happens when people aren't directly connected?
+	\item[] Chapter 12
+\end{courseday}
+
+
+
+\begin{courseday}{Week 9}{Networks as Spatial Dimensions}
+	\item[] Viewing networks as way to position yourself.
+	\item[] Chapter 6 
+\end{courseday}
+
+
+\begin{courseday}{Week 10}{Testing Hypotheses}
+	\item[] A large set of options. 
+	\item[] Cranmer, Skyler J., et al. 2017. "Navigating the range of statistical tools for inferential network analysis." American Journal of Political Science 61(1):237-251.
+	\item[] Chapter 8 (Optional)
+\end{courseday}
+
+
+\begin{courseday}{Week 11}{Exponential Random Graph Models}
+	\item[] Modeling network generation
+	\item[] Chapter 8 (Optional)
+	\item[] Read one of:
+	\item Ready, E. and Power, E.A., 2018. Why wage earners hunt: food sharing, social structure, and influence in an Arctic mixed economy. Current Anthropology, 59(1), pp.74-97.
+\end{courseday}
+
+\begin{courseday}{Week  12}{Experiments and Networks}
+	\item[] Can you run experiments on networks?
+\end{courseday}
+
+\begin{courseday}{Week 13}{Large Networks}
+	\item[] Chapter 14
+\end{courseday}
+
+\begin{courseday}{Week 14}{Group Presentations}
+	\item[] 
+
+\end{courseday}
+
+
+\begin{courseday}{TBD}{Final}
+	\item[]
+\end{courseday}
+
+\hrule
+\vspace{.25cm}
+\section*{\textbf{Additional Resources} }
+\begin{itemize}
+	\item Howe Writing Center: \url{http://miamioh.edu/hcwe}
+	\item Students also may occasionally have personal issues that arise in the course of pursuing higher education or that may interfere with their academic performance. If you find yourself facing problems affecting your coursework, you are encouraged to call Student Counseling Service (513-529-4634). For emergencies outside of business hours, the Community and Counseling and Crisis Center (844-427-4747) has a 24-hour hotline. 
+	\item Students come to Miami from a variety of economic backgrounds. If you are having financial trouble I urge you to make use of the services available through Miami Cares Resources: \url{http://miamioh.edu/emss/offices/student-success-center/student-resources/index.html} (under the Emergency Needs tab)
+	
+\end{itemize}
+
+
+
+\end{document}
+
+
+
