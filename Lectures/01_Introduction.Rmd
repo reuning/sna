@@ -1,0 +1,117 @@
+---
+title: "Social Networks and Social Theories"
+author: "Kevin Reuning"
+output: 
+  beamer_presentation:
+    includes:
+      in_header: header.tex
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+#opts_chunk$set(echo = FALSE)
+
+library(statnet)
+library(GGally)
+theme_set(theme_minimal() + theme(title=element_text(size = 20)))
+
+```
+
+## Social Network Analysis
+
+Asks questions such as: 
+
+- What leads to alliances between countries? 
+- Which political donor is most influential in a state? 
+- Who becomes friends with who in an assisted living home? 
+- Does having more friends help you survive trauma? 
+- Do schools with on-campus housing create denser webs of friendships?
+- Does trade between countries reduce the chances of war between them? 
+
+## Social Network Analysis
+
+How are these questions related? 
+
+- They involve relationships between 'actors' (countries, donors, residence...)
+
+\pause 
+
+How are they different? 
+
+- The network can be a cause or an effect.
+- We are interested in individuals, the relationship between individuals, or the whole structure
+
+## Types of Relationships 
+
+Relationships comes in many flavors
+
+- Similarities between actors: 
+  - Are they part of a club? Do they live together? In the same class? Hold similar values? 
+
+\pause 
+
+- Relations:
+  - Friends? Mother-Daughter? Boss? Nemesis? 
+  - Does one actor like the other? Do they know each other? 
+
+
+\pause 
+
+- Interactions between actors: 
+  - Did one buy something from the other? Did they talk to each other? Did work with each other?
+  
+\pause 
+
+- Flows: 
+  - Did Information pass from one actor to another actor? Did money pass from one to another? 
+  
+## Flows vs Interactions
+
+Interactions are single events that are observable whereas flows are the transmission of something to another actor:
+
+- Two actors interact in a purchase, and goods flow from one to another. 
+
+## Levels of Analysis
+
+We can study networks at three levels of analysis: 
+
+- Actor level: The position of an individual within a network. 
+- Dyad  level: The relationships that exist between all actors within a network and each other. 
+- Whole Network level: The overall structure of the network 
+
+
+## DV and IV
+
+Quick refresher: 
+
+- Dependent variable: The effect, what we want to explain.  
+- Independent variable: The cause, what we think explains something else. 
+
+Networks can be either the DV or the IV
+
+## Networks as a DV or an IV
+
+- Actor level:
+  - IV: An actor's position in a network explains... 
+  - DV: An actor is positioned in a network because of...
+- Dyad level:
+  - IV: Two actor's relationships explains...
+  - DV: Two actors have a relationship because of...
+- Network level: 
+  - IV: The structure of the network explains...
+  - DV: The structure of the network is because of...
+  
+## Returning to our questions
+
+What is the level of analysis and is the network the DV or the IV? 
+
+- What leads to alliances between countries? 
+- Which political donor is most influential in a state? 
+- Who becomes friends with who in an assisted living home? 
+- Does having more friends help you survive trauma? 
+- Do schools with on-campus housing create denser webs of friendships?
+- Does trade between countries reduce the chances of war between them? 
+
+## Network Theories
+
+

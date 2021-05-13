@@ -1,5 +1,6 @@
 ---
 title: "Introduction to Network Concepts"
+author: "Kevin Reuning"
 output: 
   beamer_presentation:
     includes:
@@ -16,8 +17,8 @@ theme_set(theme_minimal() + theme(title=element_text(size = 20)))
 
 ```
 
-## Today
-- Introduction network terms
+## Goals:
+- Introduction of network terms
 - The role of graph theory
 - How matrices (ew math) help us
 
@@ -69,8 +70,8 @@ Graph:
 > - Is defined as a set of vertices (nodes) and edges: G(V, E)
 > - Start with a set of vertices: V={A, B, C, D}
 > - Edges connect two vertices, making them adjacent: (A, C)
-> - E then the set of such connections: E={(A,C), (A,D), (B,C)} 
-  >   - Note: these edges have a direction: (A, C), is different from (C,A)
+> - E is the set of such connections: E={(A,C), (A,D), (B,C)} 
+  >   - Note: edges can have a direction: (A, C), is different from (C,A)
 
 ## Network as a Graph
 
@@ -84,7 +85,7 @@ ggnet2(net, mode="circle", color='orangered3', arrow.size = 10,
 ## Adjacent, Incident, and Degree
 
 - Two vertices that are connected by an edge are **adjacent**
-- An edge that is connected to a vertice is said to be **incident** to it. 
+- An edge that is connected to a vertex is said to be **incident** to it. 
 - The number of edges **incident** to a vertex is its **degree** 
 
 ## Degree
@@ -151,6 +152,7 @@ Whether a network is directed or undirected is dependent on the types of relatio
 ## Characteristics for nodes
 
 What are some things that might matter if you are at a node? 
+
 - Where can you move to?
 - How fast can you get there? 
 - Who can you reach? 
@@ -162,7 +164,7 @@ We can move from one vertex (node) to another through edges.
   - G-A-D-H
   - F-C-E-F-I
   - H-D-A
-- A path is a sequnce of **adjacent** vertices where none are repeated:
+- A path is a sequence of **adjacent** vertices where none are repeated:
   - G-A-D-H
   - H-D-A
 - All paths are walks, but not all walks are paths. 
@@ -462,7 +464,7 @@ gridExtra::grid.arrange(p1, p2,ncol=2)
 
 How do we organize this data? An **adjacency matrix**
 
-## Matrix Referesher 
+## Matrix Refresher 
 
 $$\mathbf{A} = \left[\begin{array}
 {rrr}
@@ -523,3 +525,12 @@ colnames(adj_mat)[3] <- "Doug Jones"
 print(xtable::xtable(adj_mat,align="lccc",digits=0), comment= F)
 
 ```
+
+
+## Takeaways
+
+- Networks can be described using mathematical concepts with a set of vertices and edges.
+- Nodes are adjacent if an edge touches them both, an edge is incident to the nodes it connects.
+- We can measure how far away nodes (vertices) are by finding the shortest path between them. 
+- Networks can be represented as adjacency matrices. 
+- 

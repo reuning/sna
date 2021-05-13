@@ -1,0 +1,27 @@
+---
+title: "Social Networks and Social Theories"
+author: "Kevin Reuning"
+output: 
+  beamer_presentation:
+    includes:
+      in_header: header.tex
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+#opts_chunk$set(echo = FALSE)
+
+library(statnet)
+library(GGally)
+theme_set(theme_minimal() + theme(title=element_text(size = 20)))
+
+```
+
+## Social Network Analysis
+
+What are interested in here?
+
+- What leads to interactions or relatonships beween things
+- How the interactions or relationships between things effects other things 
+
+
